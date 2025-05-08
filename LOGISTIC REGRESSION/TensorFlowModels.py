@@ -13,7 +13,7 @@ Y_binary = tf.random.uniform((100,), maxval=2, dtype=tf.int32)  # Binary: 0 or 1
 Y_multiclass = tf.random.uniform((100,), maxval=10, dtype=tf.int32)  # Multi-class: 0-9
 Y_regression = tf.random.normal((100,))  # Continuous targets
 
-# 1. Binary Classification
+# 1. Binary Classification with Binary Cross-Entropy loss:
 binary_model = Sequential([
     Dense(units=25, activation='sigmoid'),
     Dense(units=15, activation='sigmoid'),
@@ -29,7 +29,7 @@ pred_binary = tf.nn.sigmoid(logit_binary)
 
 
 
-# 2. Multi-Class Classification
+# 2. Multi-Class Classification with Softmax
 multiclass_model = Sequential([
     Dense(units=25, activation='relu'),
     Dense(units=15, activation='relu'),
@@ -43,7 +43,7 @@ multiclass_model.fit(X, Y_multiclass, epochs=100)
 logits_multi = multiclass_model(X)
 pred_multi = tf.nn.softmax(logits_multi)
 
-# 3. Multi-Class Classification with Adam
+# 3. Multi-Class Classification with Adam and Softmax
 adam_model = Sequential([
     Dense(units=25, activation='sigmoid'),
     Dense(units=15, activation='sigmoid'),
@@ -55,7 +55,7 @@ adam_model.compile(
 )
 adam_model.fit(X, Y_multiclass, epochs=100)
 
-# 4. Regression
+# 4. Lenear Regression
 regression_model = Sequential([
     Dense(units=25, activation='relu'),
     Dense(units=15, activation='relu'),
